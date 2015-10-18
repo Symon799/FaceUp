@@ -21,14 +21,6 @@
 #include <err.h>
 #include "pixel_operations.h"
 
-/*typedef struct Matrix Matrix;
-struct Matrix
-{
-	int x;
-	int y;
-	long** arr;
-};*/
-
 void init_sdl(void) 
 {
 	// Init only the video part
@@ -37,7 +29,6 @@ void init_sdl(void)
 		// If it fails, die with an error message
 		errx(1,"Could not initialize SDL: %s.\n", SDL_GetError());
 	}
-	// We don't really need a function for that ...
 }
 
 SDL_Surface* load_image(char *path) 
@@ -54,7 +45,6 @@ SDL_Surface* load_image(char *path)
 void wait_for_keypressed(void)
 {
 	SDL_Event event;
-	// Infinite loop, waiting for event
 	for (;;) 
 	{
 		// Take an event
@@ -66,7 +56,6 @@ void wait_for_keypressed(void)
 			case SDL_KEYDOWN: return;
 			default: break;
 		}
-		// Loop until we got the expected event
 	}
 }
 
