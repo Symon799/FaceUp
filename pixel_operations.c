@@ -71,13 +71,15 @@ void putpixel(SDL_Surface *surface, unsigned x, unsigned y, Uint32 pixel) {
 
 void convertGreyLevel(SDL_Surface *surf)
 {
+	Uint8 r, g, b, val;
+	Uint32 pixel;
 	for (int i = 0; i < surf->w; i++)
 	{
 		for (int j = 0; j < surf->h; j++)
 		{
-			Uint8 r, g, b;
+			//Uint8 r, g, b;
 
-			Uint32 pixel = getpixel(surf, i, j);
+			pixel = getpixel(surf, i, j);
 
 			SDL_GetRGB(pixel, surf->format, &r, &g, &b);
 
@@ -85,7 +87,7 @@ void convertGreyLevel(SDL_Surface *surf)
 			g = (Uint8)((float)g * 0.59);
 			b = (Uint8)((float)b * 0.11);
 
-			Uint8 val = r + g + b;
+			val = r + g + b;
 
 			pixel = SDL_MapRGB(surf->format, val, val, val);
 
@@ -94,53 +96,28 @@ void convertGreyLevel(SDL_Surface *surf)
 	}
 }
 
-void allocMatrix1(Matrix mat)
-{
-	mat.arr = (long**)malloc((mat.y+1) * sizeof(long*));
-
-	for(int i = 0; i < (mat.y+1); i++)
-		  mat.arr[i] = (long*)malloc((mat.x+1) * sizeof(long));
-}
-
-void allocMatrix(Matrix mat) 
-{
-	mat.arr = (long**)malloc((mat.x+1)*sizeof(long*));
-	for ( long i = 0; i < (mat.x+1); i++ )
-	{
-		mat.arr[i] = (long*)malloc((mat.y+1)*sizeof(long));
-	}
-	mat.arr[2][3] = 0;
-}
-
 void convertToMatrix(Matrix mat, SDL_Surface *surf)
 {
 
-	mat.arr = (long**)malloc((mat.y+1)*sizeof(long*));
-	for ( long i = 0; i < (mat.y+1); i++ )
+	mat.arr = (long**)malloc((mat.y)*sizeof(long*));
+	for ( long i = 0; i < (mat.y); i++ )
 	{
-		mat.arr[i] = (long*)malloc((mat.x+1)*sizeof(long));
+		mat.arr[i] = (long*)malloc((mat.x)*sizeof(long));
 	}
 
 
-	for (int i = 0; i < (mat.y+1); i++)
+	for (int i = 0; i < (mat.y); i++)
 	{
-		for (int j = 0; j < (mat.x+1); j++)
+		for (int j = 0; j < (mat.x); j++)
 		{
-			if (i == 0 || j == 0)
-				mat.arr[i][j] = 0;
-			else if (i == 1 && j== 1)
-				mat.arr[1][1] = (long)(getpixel(surf, 0, 0));
-			else if (i >= 2 && j >=2)
-				mat.arr[i][j] = (long)(getpixel(surf, i-1, j-1) + getpixel(surf, i-2, j-1) + getpixel(surf, i-1, j-2) - getpixel(surf, i-2, j-2));
-			else if (i < 2 && j < 2)
-				mat.arr[i][j] = (long)(getpixel(surf, i-1, j-1));
-			else if (i < 2)
-				mat.arr[i][j] = (long)(getpixel(surf, i-1, j-1) + getpixel(surf, i-1, j-2));
-			else
-				mat.arr[i][j] = (long)(getpixel(surf, i-1, j-1) + getpixel(surf, i-2, j-1));
-
-			//printf ("%ld ", mat.arr[i][j]);
+			mat.arr[i][j]= (long)(getpixel(surf, j, i) % 255);
+			
+			
+			
+			//mat.arr[i][j] = (long)(getpixel(surf, i-1, j-1) + getpixel(surf, i-2, j-1));
+			
+			printf ("%ld ", mat.arr[i][j]);
 		}
-		//printf("\n");
+		printf("\n");
 	}
 }
