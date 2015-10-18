@@ -8,7 +8,7 @@
  *        Version:  1.0
  *        Created:  10/10/2015 11:53:44 PM
  *       Revision:  none
- *       Compiler:  gcc
+ *       Compiler:  clang
  *
  *         Author:  Symon
  *
