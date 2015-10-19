@@ -95,8 +95,27 @@ void convertGreyLevel(SDL_Surface *surf)
 		}
 	}
 }
+/*
+SDL_Surface* convertToImage(struct Matrix mat, SDL_Surface *intImg)
+{
+	Uint8 val;
+	//Uint32 pixel;
+	
+	for (int i = 0; i < mat.x; i++)
+	{
+		for (int j = 0; j < mat.y; j++)
+		{
+			val = (Uint8)(mat.arr[2][2]);
+			printf ("i: %d and j: %d and val: %d\n", i, j, val);
 
-void convertToMatrix(Matrix mat, SDL_Surface *surf)
+			//pixel = SDL_MapRGB(intImg->format, val, val, val);
+			//putpixel(intImg, i, j, pixel);	
+		}
+	}
+	return intImg;
+}
+*/
+void convertToMatrix(struct Matrix mat, SDL_Surface *surf)
 {
 
 	mat.arr = (long**)malloc((mat.x)*sizeof(long*));
@@ -141,7 +160,7 @@ void convertToMatrix(Matrix mat, SDL_Surface *surf)
 			//printf("sum: %ld ", sum);
 		}
 	}
-
+	//test : affichage de matrix
 	printf("\n\n");
 	for (int j = 0; j < (mat.y); j++)
 	{

@@ -21,7 +21,6 @@
 # include <stdlib.h>
 # include <SDL.h>
 
-typedef struct Matrix Matrix;
 struct Matrix
 {
     int x;
@@ -32,6 +31,7 @@ struct Matrix
 Uint32 getpixel(SDL_Surface *surface, unsigned x, unsigned y);
 void putpixel(SDL_Surface *surface, unsigned x, unsigned y, Uint32 pixel);
 void convertGreyLevel(SDL_Surface *surf);
-void convertToMatrix(Matrix mat, SDL_Surface *surf);
+void convertToMatrix(struct Matrix mat, SDL_Surface *surf);
+SDL_Surface* convertToImage(struct Matrix mat, SDL_Surface *intImg);
 
 # endif
