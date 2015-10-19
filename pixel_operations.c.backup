@@ -143,9 +143,9 @@ void convertToMatrix(Matrix mat, SDL_Surface *surf)
 	}
 
 	printf("\n\n");
-	for (int j = 0; j < (mat.y); j++)
+	for (int i = 0; i < (mat.y); i++)
 	{
-		for (int i = 0; i < (mat.x); i++)
+		for (int j = 0; j < (mat.x); j++)
 		{
 			printf("%ld ", mat.arr[i][j]);				
 		}

@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
 	
 	SDL_Surface *image = load_image(argv[1]);
 
-	display_image(image);
+	//display_image(image);
 
 	convertGreyLevel(image);
 	
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 	//printf("%d\n", myMatrix.x);
 	//printf("%d\n", myMatrix.y);
 	
-	display_image(image);
+	//display_image(image);
 
 	convertToMatrix(myMatrix, image);;
 
