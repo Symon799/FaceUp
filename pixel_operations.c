@@ -125,7 +125,7 @@ void convertToMatrix(struct Matrix mat, SDL_Surface *surf)
 	}
 
 
-	for (int j = 0; j < (mat.y); j++)
+	for (int j = 0; j<mat.y; j++)
 	{
 		for (int i = 0; i < (mat.x); i++)
 		{
@@ -134,29 +134,22 @@ void convertToMatrix(struct Matrix mat, SDL_Surface *surf)
 		}
 		printf("\n");
 	}
-
-	long sum;
 	for (int y = mat.y; y >= 0; y--)
 	{
 		//printf ("mat.x: %d\n", mat.x);
 		for (int x = 0; x < mat.x; x++)
-		{
-			sum = 0;
+		{	
 			if (y > 0)
 			{
-				for (int lgn = 0; lgn <= y; lgn++)
+				for (int lgn =0; lgn < y; lgn++)
 				{
-					sum = sum + mat.arr[x][lgn];
+					mat.arr[x][y] += mat.arr[x][lgn];
 					//printf ("lgn: %d and y: %d and x: %d \n", lgn, y, x);
 				}
 			}
-			else
-				sum = mat.arr[x][0];
 
 			if (x > 0)
-					mat.arr[x][y] = sum + mat.arr[x-1][y];
-			else
-				mat.arr[x][y] = sum;
+				mat.arr[x][y] += mat.arr[x-1][y];
 			//printf("sum: %ld ", sum);
 		}
 	}
