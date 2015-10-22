@@ -110,10 +110,10 @@ int main(int argc, char *argv[])
 	
 	display_image(image);
 
-	convertToMatrix(myMatrix, image);
+	convertToMatrix(&myMatrix, image);
 	
 	//convertToImage(myMatrix, image);	//currently not working
-	//printf("%ld ",myMatrix.arr[2][2]);//can't access, values aren't changed :( 
+	//printf("%ld ",pt->arr[0][3]);// CELA N'A AUCUN SENS 
 
 	SDL_FreeSurface(image);
 

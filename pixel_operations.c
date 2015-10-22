@@ -95,15 +95,32 @@ void convertGreyLevel(SDL_Surface *surf)
 		}
 	}
 }
+
+
+void alloc_Mat(struct Matrix *pt_mat)
+{
+	struct Matrix mat = *pt_mat;
+
+	pt_mat->arr = (long**)malloc((mat.x)*sizeof(long*));
+	for ( long i = 0; i < (mat.x); i++ )
+	{
+		mat.arr[i] = (long*)malloc((mat.y)*sizeof(long));
+	}
+}
+
 /*
-SDL_Surface* convertToImage(struct Matrix mat, SDL_Surface *intImg)
+SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
 {
 	Uint8 val;
-	//Uint32 pixel;
+	///Uint32 pixel;
 	
-	for (int i = 0; i < mat.x; i++)
+	struct Matrix mat = *pt_mat;
+	
+	alloc_Mat(pt_mat);
+
+	for (int j = 0; j < mat.y; j++)
 	{
-		for (int j = 0; j < mat.y; j++)
+		for (int i = 0; i < mat.x; i++)
 		{
 			val = (Uint8)(mat.arr[2][2]);
 			printf ("i: %d and j: %d and val: %d\n", i, j, val);
@@ -115,15 +132,12 @@ SDL_Surface* convertToImage(struct Matrix mat, SDL_Surface *intImg)
 	return intImg;
 }
 */
-void convertToMatrix(struct Matrix mat, SDL_Surface *surf)
+
+void convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 {
+	struct Matrix mat = *pt_mat;
 
-	mat.arr = (long**)malloc((mat.x)*sizeof(long*));
-	for ( long i = 0; i < (mat.x); i++ )
-	{
-		mat.arr[i] = (long*)malloc((mat.y)*sizeof(long));
-	}
-
+	alloc_Mat(pt_mat);
 
 	for (int j = 0; j<mat.y; j++)
 	{
