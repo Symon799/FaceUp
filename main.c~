@@ -110,8 +110,8 @@ int main(int argc, char *argv[])
 	
 	display_image(image);
 
-	convertToMatrix(&myMatrix, image);
-	printf("%ld\n",myMatrix.arr[0][0]);
+	myMatrix.arr = convertToMatrix(&myMatrix, image);
+	printf("%ld\n",myMatrix.arr[4][3]);
 	
 	//convertToImage(myMatrix, image);	//currently not working
 	//printf("%ld ",pt->arr[0][3]);// CELA N'A AUCUN SENS 

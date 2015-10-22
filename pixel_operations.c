@@ -133,7 +133,7 @@ SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
 }
 */
 
-void convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
+long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 {
 	struct Matrix mat = *pt_mat;
 
@@ -179,4 +179,5 @@ void convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 		}
 		printf("\n");
 	}
+	return mat.arr;
 }
