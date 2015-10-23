@@ -93,29 +93,28 @@ int main(int argc, char *argv[])
 		errx(2, "Usage:\n%s <image>", argv[0]);
 
 	init_sdl();
-	
 	SDL_Surface *image = load_image(argv[1]);
 
 	display_image(image);
-
 	convertGreyLevel(image);
 	
 	struct Matrix myMatrix;
 
+
 	myMatrix.x = image->w;
 	myMatrix.y = image->h;
 	
-	//printf("%d\n", myMatrix.x);
-	//printf("%d\n", myMatrix.y);
-	
 	display_image(image);
-
 	myMatrix.arr = convertToMatrix(&myMatrix, image);
-	//printf("%ld\n",myMatrix.arr[4][3]);
 	
-	//convertToImage(myMatrix, image);	//currently not working
-	//printf("%ld ",pt->arr[0][3]);// CELA N'A AUCUN SENS 
+	haar_test(myMatrix);
 
+
+
+
+	//display_image(convertToImage(&myMatrix, image));//currently not working
+
+	//printf("%ld\n ",myMatrix.arr[0][3]);// CELA A MAINTENANT UN SENS 
 	SDL_FreeSurface(image);
 
 	return 0;

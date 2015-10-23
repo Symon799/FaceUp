@@ -108,30 +108,26 @@ void alloc_Mat(struct Matrix *pt_mat)
 	}
 }
 
-/*
 SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
 {
 	Uint8 val;
-	///Uint32 pixel;
+	Uint32 pixel;
 	
 	struct Matrix mat = *pt_mat;
-	
-	alloc_Mat(pt_mat);
 
 	for (int j = 0; j < mat.y; j++)
 	{
 		for (int i = 0; i < mat.x; i++)
 		{
-			val = (Uint8)(mat.arr[2][2]);
+			val = (Uint8)(mat.arr[i][j]);
 			printf ("i: %d and j: %d and val: %d\n", i, j, val);
 
-			//pixel = SDL_MapRGB(intImg->format, val, val, val);
-			//putpixel(intImg, i, j, pixel);	
+			pixel =  SDL_MapRGB(intImg->format, val, val, val);
+			putpixel(intImg, i, j, pixel);	
 		}
 	}
 	return intImg;
 }
-*/
 
 long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 {
@@ -179,5 +175,27 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 		}
 		printf("\n");
 	}
+	printf("\n");
 	return mat.arr;
 }
+
+void haar_test(struct Matrix mat)
+{
+	long s1, s2;
+	int k = 0;
+	long class[mat.x*mat.y];
+	for (int j = 0; j < mat.y; j++)
+	{
+		for (int i = 0; i < mat.x; i++)
+		{
+			if (i+23 <= mat.x && j+23 <= mat.y)
+			{
+				s1 = mat.arr[i+12][j+23];
+				s2 = mat.arr[i+23][j+23] - s1;
+				class[k] = s1 -s2;
+				k++;
+			}
+		}
+	}
+}
+
