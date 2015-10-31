@@ -134,7 +134,7 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 	struct Matrix mat = *pt_mat;
 
 	alloc_Mat(pt_mat);
-	
+
 	//test : Affichage de la Matrice d'origine
 	for (int j = 0; j<mat.y; j++)
 	{
@@ -151,14 +151,12 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 		for (int x = 0; x < mat.x; x++)
 		{	
 			mat.arr[x][y] = (long)(getpixel(surf,x,y) % 255);
-			if (y > 0)
-			{
+
 				for (int lgn =0; lgn < y; lgn++)
 				{
 					mat.arr[x][y] += (long)(getpixel(surf,x,lgn) % 255);
 					//printf ("lgn: %d and y: %d and x: %d \n", lgn, y, x);
 				}
-			}
 
 			if (x > 0)
 				mat.arr[x][y] += mat.arr[x-1][y];
@@ -197,5 +195,17 @@ void haar_test(struct Matrix mat)
 			}
 		}
 	}
+}
+
+long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur)
+{
+	if(x==0 && y==0)
+		return mat.arr[longueur][largeur];
+	if(x==0)
+		return mat.arr[longueur][largeur] - mat.arr[longueur][y-1];
+	if(y==0)
+		return mat.arr[longueur][largeur] - mat.arr[x-1][largeur];
+
+	return mat.arr[longueur][largeur]+mat.arr[x-1][y-1]-mat.arr[x-1][largeur]-mat.arr[longueur][y-1];
 }
 

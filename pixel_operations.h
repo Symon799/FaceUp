@@ -8,11 +8,8 @@
  *        Version:  1.0
  *        Created:  10/11/2015 05:38:37 PM
  *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  Symon
- *
- * ============================================================================
+ *       Compiler:  clang
+ *==========================================================================
  */
 
 # ifndef PIXEL_OPERATIONS_H_
@@ -34,5 +31,6 @@ void convertGreyLevel(SDL_Surface *surf);
 long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf);
 SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg);
 void haar_test(struct Matrix mat);
+long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur);
 
 # endif

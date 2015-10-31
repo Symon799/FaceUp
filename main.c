@@ -106,10 +106,10 @@ int main(int argc, char *argv[])
 	
 	display_image(image);
 	myMatrix.arr = convertToMatrix(&myMatrix, image);
-	
-	haar_test(myMatrix);
-
-
+	//printf("%ld\n",myMatrix.arr[4][3]);
+	//haar_test(myMatrix);
+	printf("%ld\n", myMatrix.arr[0][1]);
+	printf("%ld\n", RecSum(myMatrix,1,0,2,2));
 
 
 	//display_image(convertToImage(&myMatrix, image));//currently not working
