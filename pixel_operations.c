@@ -205,7 +205,40 @@ long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur)
 		return mat.arr[longueur][largeur] - mat.arr[longueur][y-1];
 	if(y==0)
 		return mat.arr[longueur][largeur] - mat.arr[x-1][largeur];
+	long sum = mat.arr[x-1][y-1] - mat.arr[x-1][largeur];
 
-	return mat.arr[longueur][largeur]+mat.arr[x-1][y-1]-mat.arr[x-1][largeur]-mat.arr[longueur][y-1];
+	return mat.arr[longueur][largeur]+sum-mat.arr[longueur][y-1];
+}
+
+int Haar(struct Matrix mat,int x, int y)
+{
+
+	/*int k =0;
+	for(int i =1,j = 1;i<=24;i++)
+	{
+		
+	}*/
+	
+	long class[43200];
+	int k = 0;
+	long s1,s2;
+	for(int i=x; i<24+x;i++)
+	{
+		for(int j=y;j<24+y;j++)
+		{
+			for(int l=1;2*l+i<=24+x;l++)
+			{
+				for(int L=1;L+j<=24+y;L++)
+				{
+					s1 = RecSum(mat,i,j,i+l,j+L);
+					s2 = RecSum(mat,i,j,i+l,j+2*L);
+					class[k] = s1-s2;
+					k++;
+				}
+			}
+		}
+	}
+	return k;
+			
 }
 

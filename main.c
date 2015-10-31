@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 	init_sdl();
 	SDL_Surface *image = load_image(argv[1]);
 
-	display_image(image);
+	//display_image(image);
 	convertGreyLevel(image);
 	
 	struct Matrix myMatrix;
@@ -104,12 +104,11 @@ int main(int argc, char *argv[])
 	myMatrix.x = image->w;
 	myMatrix.y = image->h;
 	
-	display_image(image);
+	//display_image(image);
 	myMatrix.arr = convertToMatrix(&myMatrix, image);
 	//printf("%ld\n",myMatrix.arr[4][3]);
 	//haar_test(myMatrix);
-	printf("%ld\n", myMatrix.arr[0][1]);
-	printf("%ld\n", RecSum(myMatrix,1,0,2,2));
+	printf("%d\n", Haar(myMatrix,1,0));
 
 
 	//display_image(convertToImage(&myMatrix, image));//currently not working
