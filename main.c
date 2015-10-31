@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 	//display_image(convertToImage(&myMatrix, image));//currently not working
 
 	//printf("%ld\n ",myMatrix.arr[0][3]);// CELA A MAINTENANT UN SENS 
-	SDL_FreeSurface(image);
+	//SDL_FreeSurface(image);
 
 	return 0;
 }

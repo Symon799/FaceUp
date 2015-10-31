@@ -1,5 +1,5 @@
-/*
- * ============================================================================
+
+/* ============================================================================
  *
  *       Filename:  pixel_operations.c
  *
@@ -10,7 +10,6 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Symon
  *
  *
  * ============================================================================
@@ -221,7 +220,7 @@ int Haar(struct Matrix mat,int x, int y)
 	
 	long class[43200];
 	int k = 0;
-	long s1,s2;
+	long s1,s2,s3,s4;
 	for(int i=x; i<24+x;i++)
 	{
 		for(int j=y;j<24+y;j++)
@@ -233,6 +232,83 @@ int Haar(struct Matrix mat,int x, int y)
 					s1 = RecSum(mat,i,j,i+l,j+L);
 					s2 = RecSum(mat,i,j,i+l,j+2*L);
 					class[k] = s1-s2;
+					k++;
+				}
+			}
+		}
+	}
+
+	long class2[27600];
+	k = 0; 
+	for(int i=x; i<24+x;i++)
+	{
+		for(int j=y;j<24+y;j++)
+		{
+			for(int l=1;l+i<=24+x;l++)
+			{
+				for(int L=1;3*L+j<=24+y;L++)
+				{
+					s1 = RecSum(mat,i,j,i+l,j+L);
+					s2 = RecSum(mat,i,j+L,i+l,j+2*L);
+					s3 = RecSum(mat,i,j+2*L,i+l,j+3*L);
+					class2[k] = s1-s2+s3;
+					k++;
+				}
+			}
+		}
+	}
+	long class3[43200];
+	k = 0;
+	for(int i=x; i<24+x;i++)
+	{
+		for(int j=y;j<24+y;j++)
+		{
+			for(int l=1;l+i<=24+x;l++)
+			{
+				for(int L=1;2*L+j<=24+y;L++)
+				{
+					s1 = RecSum(mat,i,j,i+l,j+L);
+					s2 = RecSum(mat,i,j,i+2*l,j+L);
+					class3[k] = s1-s2;
+					k++;
+				}
+			}
+		}
+	}
+	long class4[27600];
+	k = 0; 
+	for(int i=x; i<24+x;i++)
+	{
+		for(int j=y;j<24+y;j++)
+		{
+			for(int l=1;3*l+i<=24+x;l++)
+			{
+				for(int L=1;L+j<=24+y;L++)
+				{
+					s1 = RecSum(mat,i,j,i+l,j+L);
+					s2 = RecSum(mat,i,j+L,i+2*l,j+L);
+					s3 = RecSum(mat,i,j+2*L,i+3*l,j+L);
+					class4[k] = s1-s2+s3;
+					k++;
+				}
+			}
+		}
+	}
+	long class5[20736];
+	k = 0; 
+	for(int i=x; i<24+x;i++)
+	{
+		for(int j=y;j<24+y;j++)
+		{
+			for(int l=1;2*l+i<=24+x;l++)
+			{
+				for(int L=1;2*L+j<=24+y;L++)
+				{
+					s1 = RecSum(mat,i,j,i+l,j+L);
+					s2 = RecSum(mat,i+l,j,i+2*l,j+L);
+					s3 = RecSum(mat,i,j+L,i+l,j+2*L);
+					s4 = RecSum(mat,i+l,j+L,i+2*l,j+2*L);
+					class5[k] = s1-s2-s3+s4;
 					k++;
 				}
 			}
