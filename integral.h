@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  *
- *       Filename:  pixel_operations.h
+ *       Filename:  integral.h
  *
  *    Description:  null
  *
@@ -12,21 +12,14 @@
  *==========================================================================
  */
 
-# ifndef PIXEL_OPERATIONS_H_
-# define PIXEL_OPERATIONS_H_
- 
+# ifndef INTEGRAL_H
+# define INTEGRAL_H
+
 # include <stdlib.h>
 # include <SDL.h>
+#include "pixel_operations.h"
 
-struct Matrix
-{
-    int x;
-    int y;
-    long **arr;
-};
+void alloc_Mat(struct Matrix *pt_mat);
+long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf);
 
-Uint32 getpixel(SDL_Surface *surface, unsigned y, unsigned x);
-void putpixel(SDL_Surface *surface, unsigned y, unsigned x, Uint32 pixel);
-void convertGreyLevel(SDL_Surface *surf);
-
-# endif
+#endif

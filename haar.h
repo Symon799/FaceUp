@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  *
- *       Filename:  pixel_operations.h
+ *       Filename:  haar.h
  *
  *    Description:  null
  *
@@ -12,21 +12,14 @@
  *==========================================================================
  */
 
-# ifndef PIXEL_OPERATIONS_H_
-# define PIXEL_OPERATIONS_H_
- 
 # include <stdlib.h>
 # include <SDL.h>
+#include "pixel_operations.h"
 
-struct Matrix
-{
-    int x;
-    int y;
-    long **arr;
-};
+long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur);
+long *Haar(struct Matrix mat,int x,int y);
 
-Uint32 getpixel(SDL_Surface *surface, unsigned y, unsigned x);
-void putpixel(SDL_Surface *surface, unsigned y, unsigned x, Uint32 pixel);
-void convertGreyLevel(SDL_Surface *surf);
 
-# endif
+
+
+

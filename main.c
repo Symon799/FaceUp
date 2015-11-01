@@ -10,7 +10,6 @@
  *       Revision:  none
  *       Compiler:  clang
  *
- *         Author:  Symon
  *
  * ============================================================================
  */
@@ -19,7 +18,10 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <err.h>
+
 #include "pixel_operations.h"
+#include "haar.h"
+#include "integral.h"
 
 void init_sdl(void) 
 {
