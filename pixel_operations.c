@@ -8,7 +8,7 @@
  *        Version:  1.0
  *        Created:  10/11/2015 05:39:03 PM
  *       Revision:  none
- *       Compiler:  gcc
+ *       Compiler:  clang
  *
  *
  *
@@ -72,13 +72,13 @@ void convertGreyLevel(SDL_Surface *surf)
 {
 	Uint8 r, g, b, val;
 	Uint32 pixel;
-	for (int i = 0; i < surf->w; i++)
+	for (int i = 0; i < surf->h; i++)
 	{
-		for (int j = 0; j < surf->h; j++)
+		for (int j = 0; j < surf->w; j++)
 		{
 			//Uint8 r, g, b;
 
-			pixel = getpixel(surf, i, j);
+			pixel = getpixel(surf, j, i);
 
 			SDL_GetRGB(pixel, surf->format, &r, &g, &b);
 
@@ -90,7 +90,7 @@ void convertGreyLevel(SDL_Surface *surf)
 
 			pixel = SDL_MapRGB(surf->format, val, val, val);
 
-			putpixel(surf, i, j, pixel);
+			putpixel(surf, j, i, pixel);
 		}
 	}
 }
@@ -101,22 +101,21 @@ void alloc_Mat(struct Matrix *pt_mat)
 	struct Matrix mat = *pt_mat;
 
 	pt_mat->arr = (long**)malloc((mat.x)*sizeof(long*));
-	for ( long i = 0; i < (mat.x); i++ )
-	{
-		mat.arr[i] = (long*)malloc((mat.y)*sizeof(long));
-	}
+
+	for ( long i = 0; i < (mat.x); i++)
+		mat.arr[i] = (long*)calloc((mat.y),sizeof(long));
 }
 
-SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
+/*SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
 {
 	Uint8 val;
 	Uint32 pixel;
 	
 	struct Matrix mat = *pt_mat;
 
-	for (int j = 0; j < mat.y; j++)
+	for (int i = 0; i < mat.x; i++)
 	{
-		for (int i = 0; i < mat.x; i++)
+		for (int j = 0; j < mat.y; j++)
 		{
 			val = (Uint8)(mat.arr[i][j]);
 			printf ("i: %d and j: %d and val: %d\n", i, j, val);
@@ -126,7 +125,7 @@ SDL_Surface* convertToImage(struct Matrix *pt_mat, SDL_Surface *intImg)
 		}
 	}
 	return intImg;
-}
+}*/
 
 long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 {
@@ -135,44 +134,36 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 	alloc_Mat(pt_mat);
 
 	//test : Affichage de la Matrice d'origine
-	for (int j = 0; j<mat.y; j++)
+	for(int i = 0; i < mat.x; i++)
 	{
-		for (int i = 0; i < (mat.x); i++)
-		{
-			printf ("%ld ", (long)(getpixel(surf,i,j) % 255));
-		}
+		for(int j = 0; j < mat.y; j++)
+			printf("%d ", getpixel(surf,j,i) % 255);
+
 		printf("\n");
 	}
 
-	for (int y = mat.y; y >= 0; y--)
+	for (int x = mat.x-1; x >= 0; x--)
 	{
-		//printf ("mat.x: %d\n", mat.x);
-		for (int x = 0; x < mat.x; x++)
+		for (int y = 0; y < mat.y; y++)
 		{	
-			mat.arr[x][y] = (long)(getpixel(surf,x,y) % 255);
+			mat.arr[x][y] = (long)(getpixel(surf,y,x) % 255);
 
-				for (int lgn =0; lgn < y; lgn++)
-				{
-					mat.arr[x][y] += (long)(getpixel(surf,x,lgn) % 255);
-					//printf ("lgn: %d and y: %d and x: %d \n", lgn, y, x);
-				}
+				for (int lgn =0; lgn < x; lgn++)
+					mat.arr[x][y] += (long)(getpixel(surf,y,lgn) % 255);
 
-			if (x > 0)
-				mat.arr[x][y] += mat.arr[x-1][y];
-			//printf("sum: %ld ", sum);
+			if (y > 0)
+				mat.arr[x][y] += mat.arr[x][y-1];
 		}
 	}
 	//test : affichage de matrix
 	printf("\n\n");
-	for (int j = 0; j < (mat.y); j++)
+	for(int i = 0; i < mat.x; i++)
 	{
-		for (int i = 0; i < (mat.x); i++)
-		{
-			printf("%ld ", mat.arr[i][j]);				
-		}
+		for(int j = 0; j < mat.y; j++)
+			printf("%ld ", mat.arr[i][j]);
 		printf("\n");
 	}
-	printf("\n");
+	
 	return mat.arr;
 }
 
@@ -209,16 +200,9 @@ long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur)
 	return mat.arr[longueur][largeur]+sum-mat.arr[longueur][y-1];
 }
 
-int Haar(struct Matrix mat,int x, int y)
+long* Haar(struct Matrix mat,int x, int y)
 {
-
-	/*int k =0;
-	for(int i =1,j = 1;i<=24;i++)
-	{
-		
-	}*/
-	
-	long class[43200];
+	long* class = malloc(162336*sizeof(long));
 	int k = 0;
 	long s1,s2,s3,s4;
 	for(int i=x; i<24+x;i++)
@@ -232,16 +216,12 @@ int Haar(struct Matrix mat,int x, int y)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i,j+l,i+l-1,j+2*L-1);
 					class[k] = s1-s2;
-					if(i==x+1 && j==y && l==1 && L==1)
-						printf("%ld\n",class[k]);
 					k++;
 				}
 			}
 		}
 	}
 
-	long class2[27600];
-	k = 0; 
 	for(int i=x; i<24+x;i++)
 	{
 		for(int j=y;j<24+y;j++)
@@ -253,14 +233,12 @@ int Haar(struct Matrix mat,int x, int y)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
 					s3 = RecSum(mat,i,j+2*L,i+l-1,j+3*L-1);
-					class2[k] = s1-s2+s3;
+					class[k] = s1-s2+s3;
 					k++;
 				}
 			}
 		}
 	}
-	long class3[43200];
-	k = 0;
 	for(int i=x; i<24+x;i++)
 	{
 		for(int j=y;j<24+y;j++)
@@ -271,14 +249,12 @@ int Haar(struct Matrix mat,int x, int y)
 				{
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
-					class3[k] = s1-s2;
+					class[k] = s1-s2;
 					k++;
 				}
 			}
 		}
 	}
-	long class4[27600];
-	k = 0; 
 	for(int i=x; i<24+x;i++)
 	{
 		for(int j=y;j<24+y;j++)
@@ -290,14 +266,12 @@ int Haar(struct Matrix mat,int x, int y)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
 					s3 = RecSum(mat,i+2*l,j,i+3*l-1,j+L-1);
-					class4[k] = s1-s2+s3;
+					class[k] = s1-s2+s3;
 					k++;
 				}
 			}
 		}
 	}
-	long class5[20736];
-	k = 0; 
 	for(int i=x; i<24+x;i++)
 	{
 		for(int j=y;j<24+y;j++)
@@ -310,13 +284,13 @@ int Haar(struct Matrix mat,int x, int y)
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
 					s3 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
 					s4 = RecSum(mat,i+l,j+L,i+2*l-1,j+2*L-1);
-					class5[k] = s1-s2-s3+s4;
+					class[k] = s1-s2-s3+s4;
 					k++;
 				}
 			}
 		}
 	}
-	return k;
+	return class;
 			
 }
 
