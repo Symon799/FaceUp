@@ -138,7 +138,7 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 	for (int j = 0; j<mat.y; j++)
 	{
 		for (int i = 0; i < (mat.x); i++)
-		{		
+		{
 			printf ("%ld ", (long)(getpixel(surf,i,j) % 255));
 		}
 		printf("\n");
@@ -232,6 +232,8 @@ int Haar(struct Matrix mat,int x, int y)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i,j+l,i+l-1,j+2*L-1);
 					class[k] = s1-s2;
+					if(i==x+1 && j==y && l==1 && L==1)
+						printf("%ld\n",class[k]);
 					k++;
 				}
 			}
