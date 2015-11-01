@@ -35,9 +35,9 @@ long* Haar(struct Matrix mat,int x, int y)
 	{
 		for(int j=y;j<24+y;j++)
 		{
-			for(int l=1;2*l+i<=24+x;l++)
+			for(int l=1;l+i<=24+x;l++)
 			{
-				for(int L=1;L+j<=24+y;L++)
+				for(int L=1;2*L+j<=24+y;L++)
 				{
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i,j+l,i+l-1,j+2*L-1);
@@ -69,9 +69,9 @@ long* Haar(struct Matrix mat,int x, int y)
 	{
 		for(int j=y;j<24+y;j++)
 		{
-			for(int l=1;l+i<=24+x;l++)
+			for(int l=1;2*l+i<=24+x;l++)
 			{
-				for(int L=1;2*L+j<=24+y;L++)
+				for(int L=1;L+j<=24+y;L++)
 				{
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
@@ -112,7 +112,7 @@ long* Haar(struct Matrix mat,int x, int y)
 					s4 = RecSum(mat,i+l,j+L,i+2*l-1,j+2*L-1);
 					class[k] = s1-s2-s3+s4;
 					k++;
-				}
+				}	
 			}
 		}
 	}

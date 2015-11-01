@@ -4,5 +4,5 @@ Le projet contient actuellement les fonctions :
 - Conversion en image intégrale (convertToMatrix)
 - Calcul des haar features (haar)
 
-On peut utiliser ./main image.png pour lancer notre programme avec une image supérieure à 24x24.
+On peut utiliser ./main image.png pour lancer notre programme avec une image supérieure ou égale à 24x24.
 On obtient ainsi les valeurs de chaque pixel en niveaux de gris puis les valeurs de l'image intégrale.

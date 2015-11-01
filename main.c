@@ -107,17 +107,11 @@ int main(int argc, char *argv[])
 	myMatrix.y = image->w;
 	
 	display_image(image);
-	//printf("%d\n",myMatrix.x);
 	myMatrix.arr = convertToMatrix(&myMatrix, image);
-	//printf("%ld\n",myMatrix.arr[4][3]);
-	//haar_test(myMatrix);
+
 	printf("%ld\n", Haar(myMatrix,0,0)[0]);
 	printf("%ld\n",  (2*myMatrix.arr[0][0] - myMatrix.arr[0][1]));
 
-
-	//display_image(convertToImage(&myMatrix, image));//currently not working
-
-	//printf("%ld\n ",myMatrix.arr[0][3]);// CELA A MAINTENANT UN SENS 
 	//SDL_FreeSurface(image);
 
 	return 0;
