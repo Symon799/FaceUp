@@ -229,8 +229,8 @@ int Haar(struct Matrix mat,int x, int y)
 			{
 				for(int L=1;L+j<=24+y;L++)
 				{
-					s1 = RecSum(mat,i,j,i+l,j+L);
-					s2 = RecSum(mat,i,j,i+l,j+2*L);
+					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
+					s2 = RecSum(mat,i,j+l,i+l-1,j+2*L-1);
 					class[k] = s1-s2;
 					k++;
 				}
@@ -248,9 +248,9 @@ int Haar(struct Matrix mat,int x, int y)
 			{
 				for(int L=1;3*L+j<=24+y;L++)
 				{
-					s1 = RecSum(mat,i,j,i+l,j+L);
-					s2 = RecSum(mat,i,j+L,i+l,j+2*L);
-					s3 = RecSum(mat,i,j+2*L,i+l,j+3*L);
+					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
+					s2 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
+					s3 = RecSum(mat,i,j+2*L,i+l-1,j+3*L-1);
 					class2[k] = s1-s2+s3;
 					k++;
 				}
@@ -267,8 +267,8 @@ int Haar(struct Matrix mat,int x, int y)
 			{
 				for(int L=1;2*L+j<=24+y;L++)
 				{
-					s1 = RecSum(mat,i,j,i+l,j+L);
-					s2 = RecSum(mat,i,j,i+2*l,j+L);
+					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
+					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
 					class3[k] = s1-s2;
 					k++;
 				}
@@ -285,9 +285,9 @@ int Haar(struct Matrix mat,int x, int y)
 			{
 				for(int L=1;L+j<=24+y;L++)
 				{
-					s1 = RecSum(mat,i,j,i+l,j+L);
-					s2 = RecSum(mat,i,j+L,i+2*l,j+L);
-					s3 = RecSum(mat,i,j+2*L,i+3*l,j+L);
+					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
+					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
+					s3 = RecSum(mat,i+2*l,j,i+3*l-1,j+L-1);
 					class4[k] = s1-s2+s3;
 					k++;
 				}
@@ -304,10 +304,10 @@ int Haar(struct Matrix mat,int x, int y)
 			{
 				for(int L=1;2*L+j<=24+y;L++)
 				{
-					s1 = RecSum(mat,i,j,i+l,j+L);
-					s2 = RecSum(mat,i+l,j,i+2*l,j+L);
-					s3 = RecSum(mat,i,j+L,i+l,j+2*L);
-					s4 = RecSum(mat,i+l,j+L,i+2*l,j+2*L);
+					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
+					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
+					s3 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
+					s4 = RecSum(mat,i+l,j+L,i+2*l-1,j+2*L-1);
 					class5[k] = s1-s2-s3+s4;
 					k++;
 				}
