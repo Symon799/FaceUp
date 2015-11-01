@@ -1,8 +1,10 @@
-Le projet contient actuellement les fonctions :
+The project currently contains the following functions:
 
-- Conversion en niveaux de gris (convertToGreylevel)
-- Conversion en image intégrale (convertToMatrix)
-- Calcul des haar features (haar)
+- Grayscale Conversion (convertToGreylevel)
+- Integral Image (convertToMatrix)
+- Calculation of haar features (haar)
 
-On peut utiliser ./main image.png pour lancer notre programme avec une image supérieure ou égale à 24x24.
-On obtient ainsi les valeurs de chaque pixel en niveaux de gris puis les valeurs de l'image intégrale.
+Type make to compile the code.
+./main image.png can be used to launch our program with an 24x24 (or bigger) picture.
+First, the original image will be shown, then you can press Enter to convert it to grayscale and finally, press Enter again to get the output which represents the grayscale and the integral image values of the picture.
+The last two lines are testing if our function works.
