@@ -96,10 +96,13 @@ int main(int argc, char *argv[])
 
 	init_sdl();
 	SDL_Surface *image = load_image(argv[1]);
+	
+	displaySquare(image, 70, 70, 70);
 
 	display_image(image);
 	convertGreyLevel(image);
 	
+
 	struct Matrix myMatrix;
 
 

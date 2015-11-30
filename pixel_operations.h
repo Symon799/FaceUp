@@ -28,5 +28,6 @@ struct Matrix
 Uint32 getpixel(SDL_Surface *surface, unsigned y, unsigned x);
 void putpixel(SDL_Surface *surface, unsigned y, unsigned x, Uint32 pixel);
 void convertGreyLevel(SDL_Surface *surf);
+void displaySquare(SDL_Surface *surf, int x, int y, int len);
 
 # endif

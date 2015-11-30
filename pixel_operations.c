@@ -93,3 +93,26 @@ void convertGreyLevel(SDL_Surface *surf)
 		}
 	}
 }
+
+void displaySquare(SDL_Surface *surf, int x, int y, int len)
+{
+	Uint8 r, g, b;
+	Uint32 pixel;
+	for (int i = y; i <= y + len; i++)
+	{
+		for (int j = x; j <= x+ len; j++)
+		{
+			if (i==y || i== x + len || j==x || j== y + len) 
+			{
+				pixel = getpixel(surf, j, i);
+				SDL_GetRGB(pixel, surf->format, &r, &g, &b);
+				r = 0;
+				g = 254;
+				b = 0;
+				pixel = SDL_MapRGB(surf->format, r, g, b);
+				putpixel(surf, j, i, pixel);
+			}
+		}
+	}
+
+}
