@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 	display_image(image);
 	myMatrix.arr = convertToMatrix(&myMatrix, image);
 
-	printf("1st result using the Haar function: %ld\n", Haar(myMatrix,0,0)[0]);
+	printf("1st result using the Haar function: %ld\n", Haar(myMatrix,0,0,24)[0]);
 	printf("Result expected : %ld\n",  (2*myMatrix.arr[0][0] - myMatrix.arr[0][1]));
 
 	//SDL_FreeSurface(image);

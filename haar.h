@@ -17,7 +17,13 @@
 #include "pixel_operations.h"
 
 long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur);
-long *Haar(struct Matrix mat,int x,int y);
+long *Haar(struct Matrix mat,int x,int y,int longueur);
+int h(long haar);
+typedef struct {
+	long Haar;
+	int posx,posy,longueur;
+
+} cls;
 
 
 
