@@ -60,7 +60,8 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i,j+l,i+l-1,j+2*L-1);
 					f.Haar = s1-s2;
-					f.longueur=longueur;
+					f.longueur=l;
+					f.largeur = L;
 					f.posx =i;
 					f.posy =j;
 					f.type =1;
@@ -83,7 +84,8 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 					s2 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
 					s3 = RecSum(mat,i,j+2*L,i+l-1,j+3*L-1);
 					f.Haar = s1-s2+s3;
-					f.longueur=longueur;
+					f.longueur=l;
+					f.largeur = L;
 					f.posx =i;
 					f.posy =j;
 					f.type =2;
@@ -104,7 +106,8 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 					s1 = RecSum(mat,i,j,i+l-1,j+L-1);
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
 					f.Haar = s1-s2;
-					f.longueur=longueur;
+					f.longueur=l;
+					f.largeur = L;
 					f.posx =i;
 					f.posy =j;
 					f.type =3;
@@ -126,7 +129,8 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 					s2 = RecSum(mat,i+l,j,i+2*l-1,j+L-1);
 					s3 = RecSum(mat,i+2*l,j,i+3*l-1,j+L-1);
 					f.Haar = s1-s2+s3;
-					f.longueur=longueur;
+					f.longueur=l;
+					f.largeur = L;
 					f.posx =i;
 					f.posy =j;
 					f.type =4;
@@ -149,7 +153,8 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 					s3 = RecSum(mat,i,j+L,i+l-1,j+2*L-1);
 					s4 = RecSum(mat,i+l,j+L,i+2*l-1,j+2*L-1);
 					f.Haar = s1-s2-s3+s4;
-					f.longueur=longueur;
+					f.longueur=l;
+					f.largeur = L;
 					f.posx =i;
 					f.posy =j;
 					f.type =5;
@@ -162,7 +167,7 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 	return class;		
 }
 
-int hwef(long haar) {return haar<0 ? -1 : (haar!=0);}
+/*int hwef(long haar) {return haar<0 ? -1 : (haar!=0);}
 
 long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T)
 {
@@ -196,7 +201,6 @@ long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T)
 			if (h[i] == 0)
 				wz+=w[i];
 			alpha[t] = (1/2)*log((wp+(1/2)*wz)/((wn+(1/2)*wz)));
-											printf("\n");
 			Z=0;
 			for(i=1;i<=nbpos+nbneg;i++)
 				Z+=(w[i]*exp((-1)*alpha[t]*hwef((nbpos-i))*h[t]));
@@ -208,4 +212,4 @@ long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T)
 	}
 	
 	return 0;
-} 
+}*/
