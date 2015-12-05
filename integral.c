@@ -31,13 +31,13 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 	alloc_Mat(pt_mat);
 
 	//test : Affichage de la Matrice d'origine
-	for(int i = 0; i < mat.x; i++)
+	/*for(int i = 0; i < mat.x; i++)
 	{
 		for(int j = 0; j < mat.y; j++)
 			printf("%d ", getpixel(surf,j,i) % 255);
 
 		printf("\n");
-	}
+	}*/
 
 	for (int x = mat.x-1; x >= 0; x--)
 	{
@@ -53,13 +53,13 @@ long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
 		}
 	}
 	//test : affichage de matrix
-	printf("\n\n");
+	/*printf("\n\n");
 	for(int i = 0; i < mat.x; i++)
 	{
 		for(int j = 0; j < mat.y; j++)
 			printf("%ld ", mat.arr[i][j]);
 		printf("\n");
-	}
+	}*/
 	
 	return mat.arr;
 }

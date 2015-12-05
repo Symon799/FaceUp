@@ -12,6 +12,7 @@
  *==========================================================================
  */
 # include "haar.h"
+# include "integral.h"
 # include <math.h>
 # include <err.h>
 
@@ -163,14 +164,15 @@ feat* Haar(struct Matrix mat,int x, int y,int longueur)
 
 int hwef(long haar) {return haar<0 ? -1 : (haar!=0);}
 
-long Adaboost(struct Matrix mat,/*SDL_Surface **pos_tab, SDL_Surface **neg_tab,*/int nbpos, int nbneg, int T)
+long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T)
 {
 	double* alpha = malloc(T*sizeof(float));
 	int wp = 0,wn = 0,wz = 0;
 	int *h = malloc (T*sizeof(int));
 	float *w = malloc((nbpos+nbneg)*sizeof(float));
-	feat *haar = Haar(mat,0,0,24);
+	feat *haar;
 	float Z;
+	struct Matrix *pt_mat = malloc(sizeof(struct Matrix));
 	FILE               *file;
     	// open file in create/replace mode
     	if ( (file = fopen("class", "w")) == NULL) {
@@ -180,10 +182,13 @@ long Adaboost(struct Matrix mat,/*SDL_Surface **pos_tab, SDL_Surface **neg_tab,*
 		w[i] = 1/(nbpos+nbneg);
 	for (int t = 0; t<=T;t++)
 	{
-
-		h[t] = hwef(haar[t].Haar);
+		pt_mat->arr = convertToMatrix(pt_mat,*(pos_tab+t));
+		pt_mat->x = (*(pos_tab+t))->h;
+		pt_mat->y = (*(pos_tab+t))->w;
+		haar = Haar(*(pt_mat),0,0,24);
 		for(int i = 0; i<T;i++)
 		{
+			h[i] = hwef(haar[i].Haar);
 			if(h[i] >0)
 				wp+=w[i];
 			if(h[i] <0)
