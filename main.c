@@ -184,12 +184,11 @@ void haar_event()
     struct Matrix myMatrix;
     myMatrix.x = im->h;
     myMatrix.y = im->w;
-
     g_print("Haar !\n");
     im = load_image(ori);
     changeImage();
     alloc_Mat(&myMatrix);
-    //myMatrix.arr = convertToMatrix(&myMatrix, im);
+    myMatrix.arr = convertToMatrix(myMatrix, im);
 }
 
 void open_event()
@@ -290,7 +289,7 @@ void interface(int argc, char *argv[])
 	
 	gtk_table_attach_defaults (GTK_TABLE(table), box, 0, 4, 0, 2);
 	gtk_widget_show (box);
-	
+	g_signal_connect(window,"destroy",G_CALLBACK(delete_event),image);
 	gtk_widget_show (table);
 	gtk_widget_show (window);
 	gtk_main();

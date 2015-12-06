@@ -24,11 +24,8 @@ void alloc_Mat(struct Matrix *pt_mat)
 		mat.arr[i] = calloc((mat.y),sizeof(long));
 }
 
-long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
+long** convertToMatrix(struct Matrix mat, SDL_Surface *surf)
 {
-	struct Matrix mat = *pt_mat;
-
-	alloc_Mat(pt_mat);
 
 	//test : Affichage de la Matrice d'origine
 	/*for(int i = 0; i < mat.x; i++)

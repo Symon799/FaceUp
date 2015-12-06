@@ -2,6 +2,8 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#include "pixel_operations.h"
+#include "integral.h"
 #include "haar.h"
 
 typedef struct {

@@ -20,6 +20,6 @@
 #include "pixel_operations.h"
 
 void alloc_Mat(struct Matrix *pt_mat);
-long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf);
+long** convertToMatrix(struct Matrix mat, SDL_Surface *surf);
 
 #endif
