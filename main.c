@@ -23,6 +23,7 @@
 #include "pixel_operations.h"
 #include "haar.h"
 #include "integral.h"
+#include "Adaboost.h"
 
 GtkWidget *box;
 GtkWidget *window;
@@ -296,6 +297,7 @@ void interface(int argc, char *argv[])
 	gtk_main();
 }
 
+<<<<<<< HEAD
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
@@ -310,6 +312,12 @@ int main(int argc, char *argv[])
 	//myMatrix.arr = convertToMatrix(&myMatrix, load_image(argv[1]));
 	//printf("1st result using the Haar function: %ld\n", Haar(myMatrix,0,0,24)[0].Haar);
 	//printf("Result expected : %ld\n",  (2*myMatrix.arr[0][0] - myMatrix.arr[0][1]));
+=======
+	printf("1st result using the Haar function: %ld\n", Haar(myMatrix,0,0,24)[0].Haar);
+	StrongClassifier a = AdaBoost(&image,1,0,20);
+	printf("%ld\n",a.weaks[0].Haar.Haar);
+	printf("Result expected : %ld\n",  (2*myMatrix.arr[0][0] - myMatrix.arr[0][1]));
+>>>>>>> 4ef119aa13dbd842e2fb0e5a44fabd77044fbceb
 
 	SDL_FreeSurface(im);
 

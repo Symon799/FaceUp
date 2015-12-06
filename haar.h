@@ -18,14 +18,14 @@
 
 typedef struct {
 	long Haar;
-	int posx,posy,longueur,type;
+	int posx,posy,longueur,largeur,type;
 
 } feat;
 
 long RecSum(struct Matrix mat, int x, int y, int longueur, int largeur);
 feat *Haar(struct Matrix mat,int x,int y,int longueur);
-int h(long haar);
-long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T);
+//int h(long haar);
+//long Adaboost(SDL_Surface **pos_tab, int nbpos, int nbneg, int T);
 
 
 
