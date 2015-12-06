@@ -18,10 +18,10 @@ void alloc_Mat(struct Matrix *pt_mat)
 {
 	struct Matrix mat = *pt_mat;
 
-	pt_mat->arr = (long**)malloc((mat.x)*sizeof(long*));
+	pt_mat->arr = malloc((mat.x)*sizeof(long*));
 
 	for ( long i = 0; i < (mat.x); i++)
-		mat.arr[i] = (long*)calloc((mat.y),sizeof(long));
+		mat.arr[i] = calloc((mat.y),sizeof(long));
 }
 
 long** convertToMatrix(struct Matrix *pt_mat, SDL_Surface *surf)
